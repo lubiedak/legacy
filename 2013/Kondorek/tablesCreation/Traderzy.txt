@@ -1,0 +1,59 @@
+Tabela MozliwosciEmisyjnoTransakcyjne:
+
+CREATE TABLE IF NOT EXISTS Traderzy(
+Trader_Id 	INTEGER,
+TraderName 	TEXT,
+Bank_Id 	INTEGER,
+Level		INTEGER,
+UserType	TEXT);
+
+INSERT INTO Traderzy VALUES(100, "tr100",10, 1, "Trader");
+INSERT INTO Traderzy VALUES(101, "tr101",10, 1, "Trader");
+INSERT INTO Traderzy VALUES(102, "tr102",10, 1, "Trader");
+INSERT INTO Traderzy VALUES(103, "tr103",10, 2, "Trader");
+INSERT INTO Traderzy VALUES(104, "tr104",10, 2, "Trader");
+INSERT INTO Traderzy VALUES(105, "tr105",10, 3, "Trader");
+
+INSERT INTO Traderzy VALUES(110, "tr110",11, 1, "Trader");
+INSERT INTO Traderzy VALUES(111, "tr111",11, 1, "Trader");
+INSERT INTO Traderzy VALUES(112, "tr112",11, 1, "Trader");
+INSERT INTO Traderzy VALUES(113, "tr113",11, 2, "Trader");
+INSERT INTO Traderzy VALUES(114, "tr114",11, 2, "Trader");
+INSERT INTO Traderzy VALUES(115, "tr115",11, 3, "Trader");
+
+INSERT INTO Traderzy VALUES(120, "tr120",12, 1, "Trader");
+INSERT INTO Traderzy VALUES(121, "tr121",12, 1, "Trader");
+INSERT INTO Traderzy VALUES(122, "tr122",12, 1, "Trader");
+INSERT INTO Traderzy VALUES(123, "tr123",12, 2, "Trader");
+INSERT INTO Traderzy VALUES(124, "tr124",12, 2, "Trader");
+INSERT INTO Traderzy VALUES(125, "tr125",12, 3, "Trader");
+
+
+
+CREATE TABLE IF NOT EXISTS UzytkownicySystemu VALUES(
+User_Id 	INTEGER PRIMARY KEY,
+UserName 	TEXT,
+Password 	TEXT,
+Uprawnienia_Id 	INTEGER REFERENCES UprawnieniaUserow(Uprawnienia_Id),
+UserType 	TEXT);
+
+INSERT INTO UzytkownicySystemu VALUES(100, "tr100","XXXXXXXX", 1, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(101, "tr101","XXXXXXXX", 1, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(102, "tr102","XXXXXXXX", 1, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(103, "tr103","XXXXXXXX", 2, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(104, "tr104","XXXXXXXX", 2, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(105, "tr105","XXXXXXXX", 3, "Trader");
+
+INSERT INTO UzytkownicySystemu VALUES(110, "tr110","XXXXXXXX", 1, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(111, "tr111","XXXXXXXX", 1, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(112, "tr112","XXXXXXXX", 1, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(113, "tr113","XXXXXXXX", 2, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(114, "tr114","XXXXXXXX", 2, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(115, "tr115","XXXXXXXX", 3, "Trader");
+
+INSERT INTO UzytkownicySystemu VALUES(120, "tr120","XXXXXXXX", 1, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(121, "tr121","XXXXXXXX", 1, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(122, "tr122","XXXXXXXX", 1, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(123, "tr123","XXXXXXXX", 2, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(124, "tr124","XXXXXXXX", 2, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(125, "tr125","XXXXXXXX", 3, "Trader");

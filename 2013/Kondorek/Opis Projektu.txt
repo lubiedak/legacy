@@ -1,0 +1,26 @@
+Kondorek:
+
+Opis Ogólny:
+Program mia³ przedstawiæ uproszczony model zawierania umów na instrumenty finansowe miêdzy ró¿nymi podmiotami gospodarczymi (Korporacje i Banki).
+
+Co zrobiono:
+- Zosta³ stworzony i w miarê mo¿liwoœci znormalizowany projekt bazy danych w UML: Dokumentacja/uml_tabele.jpg
+- Nastêpnie zosta³ on zamieniony na komendy SQLowe do stworzenia tabel: kreacjaTabel/StworzWszystkieTabele.txt
+- W miêdzyczasie powstawa³ interfejs w C++ (Kondorek), który oparty by³ o bibliotekê sqlite3 napisan¹ w C.
+- Na koniec dorzucono do repozytorium projekt, który autor wykona³ w zesz³e wakacje
+
+Opis projektu interfejsu:
+- Na pocz¹tku programu, po weryfikacji, czy za³adowano poprawny plik bazodanowy dokonuje siê weryfikacja u¿ytkownika
+- PóŸniej dla tego uzytkownika na podstawie jego praw dostêpu, oraz mozliwosci emisyjno transakcyjnych instytucji dla której pracuje tworzone mia³o byc menu (przygotowane menu)
+- Po opracowaniu menu uzytkownik moglby dodawac umowy na rynek, podgladac swoje raporty, akceptowac proponowane z rynku umowy.
+
+
+Czego nie zrobiono:
+- Nie zaprojektowano [SQLowo] tabeli umów
+- Nie zosta³ skoñczony Interfejs
+
+
+Dlaczego tego nie zrobiono:
+Autor nie przypuszcza³, ze pocz¹tkowa idea rozroœnie siê w taki projekt. Dodatkowo uzycie technologii C++ + biblioteka w C okaza³o siê trudne.
+
+Do projektu do³¹czono starszy projekt autora "Librarian", który jest znacznie prostszy, ale kompletny.

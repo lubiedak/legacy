@@ -1,0 +1,137 @@
+/*
+* Tabela MozliwosciEmisyjnoTransakcyjne:
+*/
+
+CREATE TABLE IF NOT EXISTS MozliwosciEmisyjnoTransakcyjne(
+TypEmitenta         TEXT    PRIMARY KEY,
+EmisjaObligacje     INTEGER DEFAULT 0 CHECK(EmisjaObligacje = 0     OR EmisjaObligacje = 1),
+EmisjaPozyczki      INTEGER DEFAULT 0 CHECK(EmisjaPozyczki = 0 	    OR EmisjaPozyczki = 1),
+EmisjaAkcje         INTEGER DEFAULT 0 CHECK(EmisjaAkcje = 0         OR EmisjaAkcje = 1),
+TransakcjaObligacje INTEGER DEFAULT 0 CHECK(TransakcjaObligacje = 0 OR TransakcjaObligacje = 1),
+TransakcjaPozyczki  INTEGER DEFAULT 0 CHECK(TransakcjaPozyczki = 0  OR TransakcjaPozyczki = 1),
+TransakcjaAkcje     INTEGER DEFAULT 0 CHECK(TransakcjaAkcje = 0     OR TransakcjaAkcje = 1));
+
+INSERT INTO MozliwosciEmisyjnoTransakcyjne VALUES("Bank",1,1,1,1,1,1);
+INSERT INTO MozliwosciEmisyjnoTransakcyjne VALUES("Korporacja",1,0,1,0,1,0);
+
+
+/*
+* Tabela UprawnieniaUserow
+* Wiekszosc pol jest typu INTEGER, gdyz sqlite nie oferuje typu bool
+*/
+
+CREATE TABLE IF NOT EXISTS UprawnieniaUserow(
+Uprawnienia_Id          INTEGER PRIMARY KEY,
+MaxWielkoscTransakcji   INTEGER,
+MozliwoscEmisji         INTEGER DEFAULT 0,
+RaportBanku             INTEGER DEFAULT 0,
+RaportPrzeplywu         INTEGER DEFAULT 0);
+
+INSERT INTO UprawnieniaUserow VALUES(1,1,0,0,0);
+INSERT INTO UprawnieniaUserow VALUES(2,3,1,1,0);
+INSERT INTO UprawnieniaUserow VALUES(3,10,1,1,1);
+INSERT INTO UprawnieniaUserow VALUES(13,1,1,0,1);
+
+
+
+/*
+* UzytkownicySystemu
+*/
+CREATE TABLE IF NOT EXISTS UzytkownicySystemu(
+User_Id 	INTEGER,
+UserName 	TEXT, --moze byc inne niz nazwa tradera
+Password 	TEXT,
+Uprawnienia_Id 	INTEGER REFERENCES UprawnieniaUserow(Uprawnienia_Id),
+UserType 	TEXT);
+
+INSERT INTO UzytkownicySystemu VALUES(100, "tr100","XXXXXXXX", 1, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(101, "tr101","XXXXXXXX", 1, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(102, "tr102","XXXXXXXX", 1, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(103, "tr103","XXXXXXXX", 2, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(104, "tr104","XXXXXXXX", 2, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(105, "tr105","XXXXXXXX", 3, "Trader");
+
+INSERT INTO UzytkownicySystemu VALUES(110, "tr110","XXXXXXXX", 1, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(111, "tr111","XXXXXXXX", 1, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(112, "tr112","XXXXXXXX", 1, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(113, "tr113","XXXXXXXX", 2, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(114, "tr114","XXXXXXXX", 2, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(115, "tr115","XXXXXXXX", 3, "Trader");
+
+INSERT INTO UzytkownicySystemu VALUES(120, "tr120","XXXXXXXX", 1, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(121, "tr121","XXXXXXXX", 1, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(122, "tr122","XXXXXXXX", 1, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(123, "tr123","XXXXXXXX", 2, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(124, "tr124","XXXXXXXX", 2, "Trader");
+INSERT INTO UzytkownicySystemu VALUES(125, "tr125","XXXXXXXX", 3, "Trader");
+
+INSERT INTO UzytkownicySystemu VALUES(200, "bkrzanich","XXXXXXXX", 13, "CEO");
+INSERT INTO UzytkownicySystemu VALUES(210, "sballmer","XXXXXXXX", 13, "CEO");
+
+
+
+/*
+* Tabela Banki:
+*/
+CREATE TABLE IF NOT EXISTS Banki(
+Bank_Id                 INTEGER PRIMARY KEY,
+BankNazwa               TEXT    NOT NULL,
+LiczbaTraderow          INTEGER NOT NULL,
+TypEmitenta             TEXT    REFERENCES MozliwosciEmisyjnoTransakcyjne(TypEmitenta),
+BazowaWielkoscTransakcji INTEGER NOT NULL,
+Kapital                 INTEGER NOT NULL);
+
+INSERT INTO Banki VALUES(10, "BPH", 6, "Bank" , 1000, 1000000);
+INSERT INTO Banki VALUES(11, "PKO", 6, "Bank" , 1200, 2000000);
+INSERT INTO Banki VALUES(12, "BZWBK", 6, "Bank" , 900, 1500000);
+
+
+/*
+* Tabela Korporacje
+*/
+CREATE TABLE IF NOT EXISTS Korporacje(
+Korporacja_Id   INTEGER PRIMARY KEY,
+KorporacjaNazwa TEXT,
+TypEmitenta     TEXT    REFERENCES MozliwosciEmisyjnoTransakcyjne(TypEmitenta),
+GlownyZarzadca  TEXT,
+User_Id	        INTEGER REFERENCES UzytkownicySystemu(User_Id),
+Uprawnienia_Id  INTEGER REFERENCES UprawnieniaUserow(Uprawnienia_Id),
+MaksymalnaWielkoscTransakcji INTEGER,
+Kapital         INTEGER);
+
+
+INSERT INTO Korporacje VALUES(20, "INTEL", "Korporacja", "Brian Krzanich", 200, 13 , 1000000, 50000000);
+INSERT INTO Korporacje VALUES(21, "Microsoft", "Korporacja", "Steve Ballmer", 210, 13, 800000, 40000000);
+
+
+/*
+* Tabela Traderzy:
+*/
+CREATE TABLE IF NOT EXISTS Traderzy(
+Trader_Id 	INTEGER REFERENCES UzytkownicySystemu(User_Id),
+TraderName 	TEXT,
+Bank_Id 	INTEGER REFERENCES Banki(Bank_Id),
+Level		INTEGER,
+UserType	TEXT);
+
+INSERT INTO Traderzy VALUES(100, "tr100",10, 1, "Trader");
+INSERT INTO Traderzy VALUES(101, "tr101",10, 1, "Trader");
+INSERT INTO Traderzy VALUES(102, "tr102",10, 1, "Trader");
+INSERT INTO Traderzy VALUES(103, "tr103",10, 2, "Trader");
+INSERT INTO Traderzy VALUES(104, "tr104",10, 2, "Trader");
+INSERT INTO Traderzy VALUES(105, "tr105",10, 3, "Trader");
+
+INSERT INTO Traderzy VALUES(110, "tr110",11, 1, "Trader");
+INSERT INTO Traderzy VALUES(111, "tr111",11, 1, "Trader");
+INSERT INTO Traderzy VALUES(112, "tr112",11, 1, "Trader");
+INSERT INTO Traderzy VALUES(113, "tr113",11, 2, "Trader");
+INSERT INTO Traderzy VALUES(114, "tr114",11, 2, "Trader");
+INSERT INTO Traderzy VALUES(115, "tr115",11, 3, "Trader");
+
+INSERT INTO Traderzy VALUES(120, "tr120",12, 1, "Trader");
+INSERT INTO Traderzy VALUES(121, "tr121",12, 1, "Trader");
+INSERT INTO Traderzy VALUES(122, "tr122",12, 1, "Trader");
+INSERT INTO Traderzy VALUES(123, "tr123",12, 2, "Trader");
+INSERT INTO Traderzy VALUES(124, "tr124",12, 2, "Trader");
+INSERT INTO Traderzy VALUES(125, "tr125",12, 3, "Trader");
+

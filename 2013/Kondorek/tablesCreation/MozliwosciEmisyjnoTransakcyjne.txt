@@ -1,0 +1,17 @@
+/**
+* Tabela MozliwosciEmisyjnoTransakcyjne:
+*/
+
+CREATE TABLE IF NOT EXISTS MozliwosciEmisyjnoTransakcyjne(
+TypEmitenta 		TEXT 	PRIMARY KEY,
+EmisjaObligacje 	INTEGER DEFAULT 0 CHECK(EmisjaObligacje = 0 	OR EmisjaObligacje = 1),
+EmisjaPozyczki 		INTEGER DEFAULT 0 CHECK(EmisjaPozyczki = 0 	OR EmisjaPozyczki = 1),
+EmisjaAkcje 		INTEGER DEFAULT 0 CHECK(EmisjaAkcje = 0 	OR EmisjaAkcje = 1),
+TransakcjaObligacje 	INTEGER DEFAULT 0 CHECK(TransakcjaObligacje = 0 OR TransakcjaObligacje = 1),
+TransakcjaPozyczki 	INTEGER DEFAULT 0 CHECK(TransakcjaPozyczki = 0 	OR TransakcjaPozyczki = 1),
+TransakcjaAkcje 	INTEGER DEFAULT 0 CHECK(TransakcjaAkcje = 0 	OR TransakcjaAkcje = 1));
+
+INSERT INTO MozliwosciEmisyjnoTransakcyjne("Bank",1,1,1,1,1,1);
+INSERT INTO MozliwosciEmisyjnoTransakcyjne("Korporacja",1,0,1,0,1,0);
+
+

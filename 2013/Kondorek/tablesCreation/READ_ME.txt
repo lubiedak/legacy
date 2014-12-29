@@ -1,0 +1,1 @@
+Wystarczy uruchomic Init_database.bat, aby zainicjalizowaæ tworzenie bazy danych, nastêpnie do konsoli skopiowac polecenia z pliku StwórzWszystkieTabele.txt

@@ -1,0 +1,45 @@
+Tabela Banki:
+
+CREATE TABLE IF NOT EXIST Banki(
+Bank_Id 	INTEGER PRIMARY KEY,
+BankNazwa 	TEXT 	NOT NULL,
+LiczbaTraderow 	INTEGER NOT NULL,
+TypEmitenta 	TEXT	REFERENCES MozliwosciEmisyjnoTransakcyjne(TypEmitenta),
+BazowaWielkoscTransakcji INTEGER NOT NULL,
+Kapital 	INTEGER NOT NULL)
+
+INSERT INTO Banki VALUES(10, "BPH", 6, "Bank" , 1000, 1000000)
+INSERT INTO Banki VALUES(11, "PKO", 6, "Bank" , 1200, 2000000)
+INSERT INTO Banki VALUES(12, "BZWBK", 6, "Bank" , 900, 1500000)
+
+
+
+Tabela Korporacje
+
+
+CREATE TABLE IF NOT EXIST Korporacje(
+Korporacja_Id 	INTEGER PRIMARY KEY,
+KorporacjaNazwa TEXT 	REFERENCES UprawnieniaUserow(Uprawnienia_Id),,
+TypEmitenta 	TEXT	REFERENCES MozliwosciEmisyjnoTransakcyjne(TypEmitenta),
+GlownyZarzadca 	TEXT,
+User_Id		INTEGER,
+Uprawnienia_Id	INTEGER REFERENCES UprawnieniaUserow(Uprawnienia_Id),
+MaksymalnaWielkoscTransakcji INTEGER,
+Kapital 	INTEGER)
+
+
+INSERT INTO Korporacje VALUES(20, "INTEL", "Korporacja", "Brian Krzanich", 200, 13 , 1000000, 50000000)
+INSERT INTO Korporacje VALUES(21, "Microsoft", "Korporacja", "Steve Ballmer", 210, 13, 800000, 40000000)
+
+
+
+
+CREATE TABLE IF NOT EXIST UzytkownicySystemu(
+User_Id INTEGER,
+UserName TEXT,
+Password TEXT,
+Uprawnienia_Id INTEGER,
+UserType TEXT)
+
+INSERT INTO UzytkownicySystemu(200, "bkrzanich","XXXXXXXX", 13, "CEO")
+INSERT INTO UzytkownicySystemu(210, "sballmer","XXXXXXXX", 13, "CEO")

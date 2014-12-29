@@ -1,0 +1,19 @@
+Tabela UprawnieniaUserow
+
+/*
+Wiekszosc pol jest typu INTEGER, gdyz sqlite nie oferuje typu bool
+*/
+
+CREATE TABLE IF NOT EXISTS UprawnieniaUserow(
+Uprawnienia_Id 		INTEGER PRIMARY KEY,
+MaxWielkoscTransakcji 	INTEGER,
+MozliwoscEmisji 	INTEGER DEFAULT 0,
+RaportBanku 		INTEGER DEFAULT 0,
+RaportPrzeplywu 	INTEGER DEFAULT 0);
+
+INSERT INTO UprawnieniaUserow(1,1,0,0,0);
+INSERT INTO UprawnieniaUserow(2,3,1,1,0);
+INSERT INTO UprawnieniaUserow(3,10,1,1,1);
+INSERT INTO UprawnieniaUserow(13,1,1,0,1);
+
+

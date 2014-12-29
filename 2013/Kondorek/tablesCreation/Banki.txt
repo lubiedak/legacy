@@ -1,0 +1,33 @@
+Tabela Banki:
+
+Create Table if not exist Banki(
+Bank_Id 	INTEGER,
+BankNazwa 	TEXT,
+LiczbaTraderow 	INTEGER,
+TypEmitenta 	TEXT,
+Emitent_Id 	INTEGER,
+BazowaWielkoscTransakcji INTEGER,
+Kapital 	INTEGER)
+
+INSERT INTO Banki(10, "BPH", 6, "Bank" ,100, 1000, 1000000)
+INSERT INTO Banki(11, "PKO", 6, "Bank" ,110, 1200, 2000000)
+INSERT INTO Banki(12, "BZWBK", 6, "Bank" ,120, 900, 1500000)
+
+
+
+Tabela Korporacje
+
+
+Create Table if not exist Korporacje(
+Korporacja_Id 	INTEGER,
+KorporacjaNazwa TEXT,
+TypEmitenta 	TEXT,
+Emitent_Id 	INTEGER,
+GlownyZarzadca 	TEXT,
+User_Id		INTEGER,
+MaksymalnaWielkoscTransakcji INTEGER,
+Kapital 	INTEGER)
+
+
+INSERT INTO Korporacje(20, "INTEL", "Korporacja", 200, "Brian Krzanich", 200, 1000000, 50000000)
+INSERT INTO Korporacje(21, "Microsoft", "Korporacja", 210, "Steve Ballmer", 210, 800000, 40000000)
