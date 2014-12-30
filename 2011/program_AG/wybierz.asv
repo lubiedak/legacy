@@ -1,0 +1,40 @@
+function [do_rozrodu, ktore] = wybierz(osobniki, ocena)
+N=size(osobniki,2);
+M=size(osobniki,3);
+
+do_rozrodu=zeros(10,M);
+
+ktore=1:10;
+
+dystrybuanta=zeros(N,1);
+
+suma_ocen=sum(ocena);
+
+dystrybuanta(1)=ocena(1)/suma_ocen;
+
+osobniki_i_ocena
+for i=2:N
+    dystrybuanta(i)=dystrybuanta(i-1)+ocena(i)/suma_ocen;
+    
+end
+
+wylosowani=rand(10,1);
+
+for i=1:5
+    if (wylosowani(i)>0 && wylosowani(i)<=dystrybuanta(1))
+        do_rozrodu(i,:)=osobniki(1,1,:);
+        ktore(i)=1;
+        continue;
+    end
+    
+    for j=2:N
+        if (wylosowani(i)>dystrybuanta(j-1) && wylosowani(i)<=dystrybuanta(j))
+           do_rozrodu(i,:)=osobniki(1,j,:);
+           ktore(i)=j;
+        end
+    end
+end
+
+
+
+end

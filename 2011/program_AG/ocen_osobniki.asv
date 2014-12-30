@@ -1,0 +1,10 @@
+function [ oceny ] = ocen_osobniki( osobniki )
+oceny=1:N;
+
+for i=1:N
+   x=bin2dec(num2str(osobniki(i,:)))/(2^M-1);
+   oceny(i)=20-5*sin(50*x)*cos(32*x)-10*(x-1)^2;
+end
+
+end
+

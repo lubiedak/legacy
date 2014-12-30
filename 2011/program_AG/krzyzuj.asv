@@ -1,0 +1,26 @@
+function [nowe] = krzyzuj(do_rozrodu)
+N=size(do_rozrodu,1);
+M=size(do_rozrodu,2)-2;
+
+nowe=zeros(20,20); %to powinno byc uogólnione
+
+licznik=1;
+
+for i=1:N-1
+    
+       m_przeciecia=round(0.5+M*rand(1));
+       j=round(0.5+N*rand(1));
+       
+       nowe(licznik,1:m_przeciecia)=do_rozrodu(i,1:m_przeciecia);
+       nowe(licznik,m_przeciecia+1:end)=do_rozrodu(j,m_przeciecia+1:end);
+        
+       nowe(licznik+1,1:m_przeciecia)=do_rozrodu(j,1:m_przeciecia);
+       nowe(licznik+1,m_przeciecia+1:end)=do_rozrodu(i,m_przeciecia+1:end);
+       
+       licznik=licznik+2;
+       
+
+end
+
+
+end
