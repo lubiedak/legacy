@@ -1,0 +1,9 @@
+N=20;
+min=20;
+max=30;
+max_miast=4;
+zapotrzebowanie=[12,14,11,6,6,11,5,7,14,15,12,13,5,12,13,10,14,15,13,7];
+opcje=zeros(10,max_miast);
+suma=sum(zapotrzebowanie);
+
+for i=1:2^N-2
